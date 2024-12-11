@@ -1,0 +1,68 @@
+version: '3.9'
+services:
+  apache:
+    container_name: project_be_apache 
+    build: 
+      context: ./
+      dockerfile: ./backend/apache/Dockerfile  
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend/laravel:/var/www/html
+      - ./backend/apache/config/conf-available:/etc/apache2/conf-available
+      - ./backend/apache/config/conf-enabled:/etc/apache2/conf-enabled
+      - ./backend/apache/config/mods-available:/etc/apache2/mods-available
+      - ./backend/apache/config/mods-enabled:/etc/apache2/mods-enabled
+      - ./backend/apache/config/sites-available:/etc/apache2/sites-available
+      - ./backend/apache/config/sites-enabled:/etc/apache2/sites-enabled
+      - ./backend/apache/config/apache2.conf:/etc/apache2/apache2.conf
+      - ./backend/apache/config/ports.conf:/etc/apache2/ports.conf
+      - ./backend/apache/config/envvars:/etc/apache2/envvars
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    networks:
+      - project_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: project_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  
+      MYSQL_DATABASE: ${MYSQL_DATABASE}         
+      MYSQL_USER: ${MYSQL_USER}                  
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
+    volumes:
+      - project_SQL_database:/var/lib/mysql 
+    ports:
+      - "3306:3306"
+    networks:
+      - project_network
+
+  laravel:
+    image: php:8.3-cli
+    container_name: project_be_laravel
+    build:
+      context: ./
+      dockerfile: ./backend/laravel/Dockerfile
+    volumes:
+      - ./backend/laravel:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - project_network
+    environment:  
+      DB_HOST: project_mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_CONNECTION: mysql
+
+volumes:
+  project_SQL_database:
+
+networks:
+  project_network:

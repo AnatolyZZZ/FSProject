@@ -1,0 +1,27 @@
+FROM php:8.2-apache
+
+# Install required dependencies
+RUN apt-get update && apt-get install -y supervisor \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create necessary directories and log files
+RUN mkdir /etc/apache2/logs/ && \
+    chown -R www-data:www-data /etc/apache2/logs/ && \
+    chmod -R 755 /etc/apache2/logs/ 
+
+# Modify Apache's log settings to log to stdout and stderr
+# RUN echo "ErrorLog /dev/stderr" >> /etc/apache2/apache2.conf && \
+    # echo "CustomLog /dev/stdout combined" >> /etc/apache2/apache2.conf
+
+
+# Copy supervisor config
+COPY /apache/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Enable necessary Apache modules
+RUN a2enmod rewrite
+
+# Expose port 80
+EXPOSE 80
+
+# CMD to run supervisord which manages apache2
+CMD ["supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

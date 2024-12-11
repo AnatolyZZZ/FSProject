@@ -1,0 +1,49 @@
+/backend/laravel/.phpunit.cache
+/backend/laravel/node_modules
+/backend/laravel/public/build
+/backend/laravel/public/hot
+/backend/laravel/public/storage
+/backend/laravel/storage/*.key
+/backend/laravel/storage/pail
+/backend/laravel/vendor
+/backend/laravel.env
+/backend/laravel.env.backup
+/backend/laravel.env.production
+/backend/laravel.phpactor.json
+/backend/laravel.phpunit.result.cache
+/backend/laravel/Homestead.json
+/backend/laravel/Homestead.yaml
+/backend/laravel/auth.json
+/backend/laravel/npm-debug.log
+/backend/laravel/yarn-error.log
+/backend/laravel/.fleet
+/backend/laravel/.idea
+/backend/laravel/.nova
+/backend/laravel/.vscode
+/backend/laravel/.zed
+
+
+# dependencies
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.js
+
+# testing
+/frontend/coverage
+
+# production
+/frontend/build
+
+# misc
+/frontend/.DS_Store
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+
+.env
