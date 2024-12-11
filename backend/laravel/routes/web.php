@@ -7,11 +7,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test-db', function () {
+// Apply the middleware only to the /test-db route
+Route::middleware([CheckDatabaseConnection::class])->get('/test-db', function () {
+    Log::info('Test DB route hit - before DB connection');
     try {
-        DB::connection()->getPdo();
-        return "Database connection successful!";
+        // Attempt a DB query to check the connection
+        DB::table('sessions')->first();
+        Log::info('Test DB route - session fetched successfully');
     } catch (\Exception $e) {
-        return "Could not connect to the database. Please check your configuration. Error: " . $e->getMessage();
+        // Log any connection issues
+        Log::error('Test DB route - database connection error: ' . $e->getMessage());
     }
 });

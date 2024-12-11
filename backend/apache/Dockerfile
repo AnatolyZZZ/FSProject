@@ -15,7 +15,7 @@ RUN mkdir /etc/apache2/logs/ && \
 
 
 # Copy supervisor config
-COPY /apache/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY /backend/apache/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Enable necessary Apache modules
 RUN a2enmod rewrite

@@ -49,6 +49,10 @@ services:
       dockerfile: ./backend/laravel/Dockerfile
     volumes:
       - ./backend/laravel:/var/www/html
+      - ./backend/laravel/storage:/var/www/html/storage_host
+      - ./backend/laravel/bootstrap:/var/www/html/bootstrap_host
+      - storage:/var/www/html/storage
+      - bootstrap:/var/www/html/bootstrap
     depends_on:
       - mysql
     networks:
@@ -63,6 +67,8 @@ services:
 
 volumes:
   project_SQL_database:
+  storage:
+  bootstrap:
 
 networks:
   project_network:
