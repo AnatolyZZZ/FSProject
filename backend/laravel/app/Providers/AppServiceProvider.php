@@ -21,18 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Log to confirm if we're inside the boot method
-        Log::info('AppServiceProvider NEW boot method executed');
-       
-        try {
-            $session = DB::table('sessions')->first();
-            if ($session) {
-                Log::info('First session found: ', (array)$session);
-            } else {
-                Log::info('No sessions found.');
-            }
-        } catch (\Exception $e) {
-            Log::error('Database connection error during boot: ' . $e->getMessage());
-        }
+        // Use the tester to run the database connection test logic
+        $tester->testConnection('AppServiceProvider Boot');
     }
 }
