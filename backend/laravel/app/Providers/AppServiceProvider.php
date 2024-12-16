@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(DatabaseConnectionTester::class, function ($app) {
+            return new DatabaseConnectionTester();
+        });
     }
 
     /**
@@ -22,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Use the tester to run the database connection test logic
-        $tester->testConnection('AppServiceProvider Boot');
+        Log::info('AppServiceProvider Booted');
     }
 }
