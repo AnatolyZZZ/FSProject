@@ -19,6 +19,7 @@ class CheckDatabaseConnection
     public function handle(Request $request, Closure $next)
     {
         try {
+            Log::info('Middleware executed');
             // Attempt to run a simple query to check if the connection is alive
             DB::connection()->getPdo();
             Log::info('MySQL connection is alive.');
