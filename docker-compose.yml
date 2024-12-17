@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   apache:
     container_name: project_be_apache 
