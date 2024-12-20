@@ -3,10 +3,12 @@ use App\Http\Middleware\CheckDatabaseConnection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/api/test', [TestController::class, 'store']);
 
 // Apply the middleware only to the /test-db route
 Route::middleware([CheckDatabaseConnection::class])->get('/test-db', function () {

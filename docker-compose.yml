@@ -17,8 +17,14 @@ services:
       - ./backend/apache/config/apache2.conf:/etc/apache2/apache2.conf
       - ./backend/apache/config/ports.conf:/etc/apache2/ports.conf
       - ./backend/apache/config/envvars:/etc/apache2/envvars
-    env_file:
-      - .env
+    environment:  
+      DB_HOST: project_mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      CUSTOM_APACHE_LOG_DIR: ${CUSTOM_APACHE_LOG_DIR}
+      DB_CONNECTION: mysql
     depends_on:
       - mysql
     networks:
