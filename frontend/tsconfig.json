@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+	  "baseUrl": "src",
+	  "paths": {
+		"@components/*": ["components/*"],
+		"@utils/*": ["utils/*"],
+		"@store/*": ["store/*"],
+		"@api": ["plugins/axios"],
+		"@assets/*": ["assets/*"] 
+	  },
+	  "esModuleInterop": true,
+	  "allowSyntheticDefaultImports": true,
+	  "jsx": "react-jsx",
+	},
+	"include": ["src"]
+  }
