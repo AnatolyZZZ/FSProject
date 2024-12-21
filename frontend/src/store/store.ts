@@ -1,6 +1,6 @@
 import rootReducer from './rootReducer';
 import { configureStore } from '@reduxjs/toolkit';
-export { ActionsType } from './types.d'
+export { ActionType } from './types.d'
 
 const store = configureStore({
 	reducer: rootReducer,

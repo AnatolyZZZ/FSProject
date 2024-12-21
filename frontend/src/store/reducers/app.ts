@@ -1,11 +1,9 @@
-import { ActionsType } from "../types.d"
-
-export type AlertTypes = 'success' | 'info' | 'warning' | 'error'
+import { ActionType, AlertType, Action } from "../types.d"
 
 export interface AppState {
     show_alert: boolean
     alert_message : string
-    alert_type : AlertTypes
+    alert_type : AlertType
     api_key : string
     api_url : string
   }
@@ -18,20 +16,15 @@ export interface AppState {
     api_url : process.env.REACT_APP_API_URL!,
   };
 
-  const app = (state = initialState, action : { type: ActionsType, payload: any}) : AppState => {
+  const app = (state = initialState, action : Action) : AppState => {
 	const { type, payload} = action;
 	switch (type) {
-		case  ActionsType.SET_ALERT_MESSAGE: 
+		case  ActionType.SET_ALERT_MESSAGE: 
 			return {...state, alert_message: payload};
-		case ActionsType.SET_ALERT_SHOW:
+		case ActionType.SET_ALERT_SHOW:
 			return {...state, show_alert: payload};
-		case ActionsType.SET_ALERT_TYPE:
+		case ActionType.SET_ALERT_TYPE:
 			return {...state, alert_type: payload};
-		case ActionsType.SHOW_ALERT:
-			{
-				const { type = 'success', message } = payload;
-				return {...state, alert_message: message, alert_type: type, show_alert: true}
-			}
 		default: return state
 	}
   }

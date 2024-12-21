@@ -2,8 +2,10 @@ import logo from '@assets/logo.svg';
 import './App.css';
 import { useEffect } from 'react'
 import { postData } from '@api'
-import { Dispatch, ActionsType } from '@store/store';
+import { Dispatch } from '@store/store';
+import { showAlert } from '@store/actions/app';
 import {  useDispatch } from 'react-redux';
+import AlertMessage from '@components/AlertMessage';
 
 
 function App() {
@@ -11,18 +13,18 @@ function App() {
   useEffect (()=> {
     const fetchAndMessage = async () => {
       const timestamp = Date.now();
-
-      const {data, error} = await postData('/test', {timestamp});
+      const {data, error} = await postData<string>('/test', {timestamp});
       if (data) {
-        dispatch({type: ActionsType.SHOW_ALERT, payload: {message: data}})
+        dispatch(showAlert({ message: data }))
       } else {
-        dispatch({type: ActionsType.SHOW_ALERT, payload: {alert_type: 'error', message: error}})
+        dispatch(showAlert({ type: 'error', message: error}))
       }
     }
   fetchAndMessage()
   }, [])
   return (
     <div className="App">
+      <AlertMessage/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

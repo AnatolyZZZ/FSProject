@@ -33,7 +33,7 @@ export const getData = async <T>(url: string, params: Record<string, string> = {
 		return { data, error: null};
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
-			return { error: error.message, data: null};
+			return { error: error.response?.data?.message, data: null};
 		} else {
 			return { error: 'An unexpected error occurred', data: null };
 		}
@@ -51,7 +51,7 @@ export const postData = async <T>(url: string, body: unknown, params: Record<str
 		return { data, error: null};
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
-			return { error: error.message, data: null};
+			return { error: error.response?.data?.message, data: null};
 		} else {
 			return { error: 'An unexpected error occurred', data: null };
 		}
