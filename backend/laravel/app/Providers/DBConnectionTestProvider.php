@@ -21,8 +21,8 @@ class DBConnectionTestProvider extends ServiceProvider
      */
     public function boot(DatabaseConnectionTester $tester)
     {   
-        Log::info('Booting DBCP');
+        Log::warning('Booting DBCP write to channel');
         // Execute the test connection method during boot
-        $tester->testConnection('App Boot');
+        $tester->testConnection('provider');
     }
 }

@@ -9,22 +9,15 @@ use Illuminate\Http\Request;
 
 class CheckDatabaseConnection
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next)
     {
+        Log::info('Middleware executed');
         try {
-            Log::info('Middleware executed');
             // Attempt to run a simple query to check if the connection is alive
             DB::connection()->getPdo();
-            Log::info('MySQL connection is alive.');
+            Log::info('MySQL connection is alive in middleware.');
         } catch (\Exception $e) {
-            Log::error('Database connection error during request: ' . $e->getMessage());
+            Log::error('Database connection error in middleware: ' . $e->getMessage());
         }
 
         return $next($request);
