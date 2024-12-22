@@ -7,7 +7,7 @@ const apiUrl = state.app.api_url;
 const api = axios.create({
 	baseURL: apiUrl, 
 	timeout: 2000,
-	headers: { 'Content-Type': 'application/json' }
+	headers: { 'Content-Type': 'application/json', 'credentials' : 'include' }
 });
 
 type SuccessResponse<T> = {

@@ -19,6 +19,7 @@ chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 php artisan db:seed --force
 php artisan install:api
 php artisan migrate --force
+php artisan config:publish cors
 
 # Keep the container running
 tail -f /dev/null
