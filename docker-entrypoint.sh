@@ -16,8 +16,9 @@ chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 ./wait-for-it.sh mysql:3306 --timeout=30 --strict -- echo "MySQL is ready"
 
 # Run database migrations and seeding
-php artisan migrate --force
 php artisan db:seed --force
+php artisan install:api
+php artisan migrate --force
 
 # Keep the container running
 tail -f /dev/null
