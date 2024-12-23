@@ -27,6 +27,7 @@ COPY /backend/apache/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Enable necessary Apache modules
 RUN a2enmod rewrite
+RUN a2enmod headers
 
 # Expose port 80
 EXPOSE 80

@@ -3,7 +3,8 @@ services:
     container_name: project_be_apache 
     build: 
       context: ./
-      dockerfile: ./backend/apache/Dockerfile  
+      dockerfile: ./backend/apache/Dockerfile
+    restart: on-failure 
     ports:
       - "8080:80"
     volumes:
@@ -25,6 +26,7 @@ services:
       DB_PASSWORD: ${MYSQL_PASSWORD}
       CUSTOM_APACHE_LOG_DIR: ${CUSTOM_APACHE_LOG_DIR}
       DB_CONNECTION: mysql
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
     depends_on:
       - mysql
     networks:
@@ -33,7 +35,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: project_mysql
-    restart: always
+    restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  
       MYSQL_DATABASE: ${MYSQL_DATABASE}         
@@ -52,6 +54,7 @@ services:
     build:
       context: ./
       dockerfile: ./backend/laravel/Dockerfile
+    restart: on-failure
     volumes:
       - ./backend/laravel/app:/var/www/html/app
       - ./backend/laravel/bootstrap/app.php:/var/www/html/bootstrap/app.php
@@ -76,6 +79,7 @@ services:
       DB_USERNAME: ${MYSQL_USER}
       DB_PASSWORD: ${MYSQL_PASSWORD}
       DB_CONNECTION: mysql
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
 
 volumes:
   project_SQL_database:
