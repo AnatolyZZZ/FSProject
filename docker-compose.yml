@@ -8,7 +8,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./backend/laravel:/var/www/html
+      - backend:/var/www/html
       - ./backend/apache/config/conf-available:/etc/apache2/conf-available
       - ./backend/apache/config/conf-enabled:/etc/apache2/conf-enabled
       - ./backend/apache/config/mods-available:/etc/apache2/mods-available
@@ -18,6 +18,16 @@ services:
       - ./backend/apache/config/apache2.conf:/etc/apache2/apache2.conf
       - ./backend/apache/config/ports.conf:/etc/apache2/ports.conf
       - ./backend/apache/config/envvars:/etc/apache2/envvars
+      - ./backend/laravel/app:/var/www/html/app
+      - ./backend/laravel/bootstrap/app.php:/var/www/html/bootstrap/app.php
+      - ./backend/laravel/bootstrap/providers.php:/var/www/html/bootstrap/providers.php
+      - ./backend/laravel/config:/var/www/html/config
+      - ./backend/laravel/database:/var/www/html/database
+      - ./backend/laravel/public:/var/www/html/public
+      - ./backend/laravel/resources:/var/www/html/resources
+      - ./backend/laravel/routes:/var/www/html/routes
+      - ./backend/laravel/tests:/var/www/html/tests
+      - ./backend/laravel/.env:/var/www/html/.env
     environment:  
       DB_HOST: project_mysql
       DB_PORT: 3306
@@ -56,6 +66,7 @@ services:
       dockerfile: ./backend/laravel/Dockerfile
     restart: on-failure
     volumes:
+      - backend:/var/www/html
       - ./backend/laravel/app:/var/www/html/app
       - ./backend/laravel/bootstrap/app.php:/var/www/html/bootstrap/app.php
       - ./backend/laravel/bootstrap/providers.php:/var/www/html/bootstrap/providers.php
@@ -83,8 +94,7 @@ services:
 
 volumes:
   project_SQL_database:
-  storage:
-  bootstrap:
+  backend:
 
 networks:
   project_network:

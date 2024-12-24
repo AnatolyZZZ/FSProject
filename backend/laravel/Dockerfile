@@ -23,10 +23,10 @@ WORKDIR /var/www/html
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Copy the entry script
-COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY ./laravel-entrypoint.sh /usr/local/bin/laravel-entrypoint.sh
 
 # Ensure the entry script is executable
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/laravel-entrypoint.sh
 
 # Set the entrypoint to the entry script
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["laravel-entrypoint.sh"]
