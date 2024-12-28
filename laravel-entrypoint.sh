@@ -1,4 +1,7 @@
 #!/bin/bash
+# first copy files from host -> backup -> varr/www/html
+cp -rv /var/www/backup/ /var/www/html/
+
 
 # Perform Composer install
 composer install --optimize-autoloader

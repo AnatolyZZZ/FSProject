@@ -22,6 +22,9 @@ WORKDIR /var/www/html
 # Set environment variable to allow running Composer as root
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
+# Copy all files into main folder -> volume -> apache container
+COPY ./backend/laravel/ /var/www/backup/
+
 # Copy the entry script
 COPY ./laravel-entrypoint.sh /usr/local/bin/laravel-entrypoint.sh
 
