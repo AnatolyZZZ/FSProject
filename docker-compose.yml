@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - laravel:/var/www/html
+      - ./backend/laravel:/var/www/html
       - ./backend/apache/config:/etc/apache2
     env_file:
       - .env
@@ -42,7 +42,7 @@ services:
       dockerfile: ./backend/laravel/Dockerfile
     restart: on-failure
     volumes:
-      - laravel:/var/www/html
+       - ./backend/laravel:/var/www/html
     depends_on:
       - mysql
     networks:
@@ -52,7 +52,6 @@ services:
 
 volumes:
   project_SQL_database:
-  laravel:
 
 networks:
   project_network:

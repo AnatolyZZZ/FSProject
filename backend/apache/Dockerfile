@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install -y supervisor \
     && rm -rf /var/lib/apt/lists/*
 
 # Create necessary directories and log files
-RUN mkdir /etc/apache2/logs/ && \
-    chown -R www-data:www-data /etc/apache2/logs/ && \
-    chmod -R 755 /etc/apache2/logs/ 
+# RUN mkdir /etc/apache2/logs/ && \
+#     chown -R www-data:www-data /etc/apache2/logs/ && \
+#     chmod -R 755 /etc/apache2/logs/ 
 
 # Copy supervisor config
 COPY /backend/apache/supervisord.conf /etc/supervisor/conf.d/supervisord.conf

@@ -1,1 +1,25 @@
 
+2024-12-28 11:19:22,229 INFO Set uid to user 0 succeeded
+2024-12-28 11:19:22,239 INFO supervisord started with pid 1
+2024-12-28 11:19:23,247 INFO spawned: 'apache2' with pid 7
+2024-12-28 11:19:23,552 WARN exited: apache2 (exit status 1; not expected)
+2024-12-28 11:19:24,558 INFO spawned: 'apache2' with pid 18
+2024-12-28 11:19:25,802 INFO success: apache2 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-12-28 11:19:25,804 WARN exited: apache2 (exit status 1; not expected)
+2024-12-28 11:19:26,815 INFO spawned: 'apache2' with pid 29
+2024-12-28 11:19:27,157 WARN exited: apache2 (exit status 1; not expected)
+2024-12-28 11:19:28,168 INFO spawned: 'apache2' with pid 40
+2024-12-28 11:19:28,531 WARN exited: apache2 (exit status 1; not expected)
+2024-12-28 11:19:30,543 INFO spawned: 'apache2' with pid 51
+2024-12-28 11:19:31,013 WARN exited: apache2 (exit status 1; not expected)
+2024-12-28 11:19:34,025 INFO spawned: 'apache2' with pid 62
+2024-12-28 11:19:34,419 WARN exited: apache2 (exit status 1; not expected)
+2024-12-28 11:19:35,423 INFO gave up: apache2 entered FATAL state, too many start retries too quickly
+2024-12-28 11:27:07,591 INFO Set uid to user 0 succeeded
+2024-12-28 11:27:07,599 INFO supervisord started with pid 1
+2024-12-28 11:27:08,607 INFO spawned: 'apache2' with pid 7
+2024-12-28 11:27:09,910 INFO success: apache2 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-12-28 11:35:06,423 INFO Set uid to user 0 succeeded
+2024-12-28 11:35:06,431 INFO supervisord started with pid 1
+2024-12-28 11:35:07,454 INFO spawned: 'apache2' with pid 8
+2024-12-28 11:35:08,732 INFO success: apache2 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
