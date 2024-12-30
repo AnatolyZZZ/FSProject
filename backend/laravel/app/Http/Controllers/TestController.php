@@ -16,12 +16,12 @@ class TestController extends Controller
         $res = $total % 2;
         if ($res == 0) {
             return response()->json([ 
-                'message' => 'Succsess', 
-                'data' => [ 'total_milliseconds' => $total]
+                'message' => 'Test successful', 
+                'total_milliseconds' => $total
             ]);
         }
         else {
-            return response()->json(['error' => 'Test failed'], 400);
+            return response()->json(['message' => 'Test failed'], 400);
         }
     }
 }
