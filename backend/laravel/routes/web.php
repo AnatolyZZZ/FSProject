@@ -33,4 +33,5 @@ Route::middleware([CheckDatabaseConnection::class])->get('/test-db', function ()
         // Log any connection issues
         Log::error('Test DB route - database connection error: ' . $e->getMessage());
     }
+    return view('welcome');
 });

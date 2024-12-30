@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Use the tester to run the database connection test logic
-        Log::info('AppServiceProvider Booted');
+        // Log::info('AppServiceProvider Booted');
     }
 }
