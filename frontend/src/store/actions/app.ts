@@ -8,7 +8,7 @@ export const setAlertShow = (show: boolean) : Action => ({type: ActionType.SET_A
 export const showAlert = createAsyncThunk(
 	'app/showAlert',
 	async (params: {message: string, type?: AlertType , timeout?: number}, {dispatch} ) => {
-		const {message, type = 'success', timeout = 3} = params;
+		const {message, type = 'success', timeout = 25} = params;
 		const timeoutInMilliseconds = 1000 * timeout;
 		if (!message) return
 		dispatch(setAlertType(type));
