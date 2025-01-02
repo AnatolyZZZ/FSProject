@@ -4,10 +4,11 @@ import store, { RootState } from '@store/store';
 const state : RootState = store.getState();
 const apiUrl = state.app.api_url;
 
-const api = axios.create({
+export const api = axios.create({
 	baseURL: apiUrl, 
 	timeout: 2000,
-	headers: { 'Content-Type': 'application/json', 'credentials' : 'include' }
+	headers: { 'Content-Type': 'application/json', 'credentials' : 'include' },
+	withCredentials: true
 });
 
 type SuccessResponse<T> = {
@@ -22,14 +23,18 @@ type SuccessResponse<T> = {
 
 type ResponseType<T> = SuccessResponse<T> | ErrorResponse
 
-export const getData = async <T>(url: string, params: Record<string, string> = {}): Promise<ResponseType<T>> => {
+export const getData = async <T>(
+	url: string, 
+	params: Record<string, string> = {}, 
+	signal: AbortSignal = null
+): Promise<ResponseType<T>> => {
 	try {
 		const queryString = new URLSearchParams(params).toString();
 		const fullUrl = queryString ? `${url}?${queryString}` : url;
 	
-		const response: AxiosResponse<T> = await api.get(fullUrl);
+		const response: AxiosResponse<T> = await api.get(fullUrl, {signal});
 		const { data } = response
-		if (!data) return { error: 'No data returned', data: null };
+		if (!data) return { error: null, data: null };
 		return { data, error: null};
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
@@ -40,12 +45,17 @@ export const getData = async <T>(url: string, params: Record<string, string> = {
 	}
 };
 
-export const postData = async <T>(url: string, body: unknown, params: Record<string, string> = {}): Promise<ResponseType<T>> => {
+export const postData = async <T>(
+	url: string, 
+	body: unknown, 
+	params: Record<string, string> = {},
+	signal: AbortSignal = null
+): Promise<ResponseType<T>> => {
 	try {
 		const queryString = new URLSearchParams(params).toString();
 		const fullUrl = queryString ? `${url}?${queryString}` : url;
 	
-		const response: AxiosResponse<T> = await api.post(fullUrl, body);
+		const response: AxiosResponse<T> = await api.post(fullUrl, body, {signal});
 		const { data } = response
 		if (!data) return { error: 'No data returned', data: null };
 		return { data, error: null};

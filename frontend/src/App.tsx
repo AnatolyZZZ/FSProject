@@ -1,54 +1,55 @@
-import logo from '@assets/logo.svg';
-import './App.css';
 import { useEffect } from 'react'
 import { postData, getData } from '@api'
 import { Dispatch, RootState } from '@store/store';
+import Button from '@mui/material/Button';
 import { showAlert } from '@store/actions/app';
 import {  useDispatch, useSelector } from 'react-redux';
 import AlertMessage from '@components/AlertMessage';
+import './App.scss';
+import { useCookies } from 'react-cookie';
+import { api } from './plugins/axios'
 
 
 function App() {
   const be_url = useSelector<RootState>(state => state.app.be_url)
   const dispatch = useDispatch<Dispatch>();
+  const [cookies, setCookie, removeCookie] = useCookies(['XSRF-TOKEN']);
+
+  const fetchAndMessage = async () => {
+    const moment = Date.now();
+    const { data, error } = await postData<{message: string, total_milliseconds : number}>('/test', {moment});
+    if (data) {
+      dispatch(showAlert({ message: data.message }))
+    } else {   
+      dispatch(showAlert({ type: 'error', message: error}))
+    }
+  }
+
   useEffect (()=> {
-    const fetchAndMessage = async () => {
-      const timestamp = Date.now();
-      const {data, error} = await postData<string>('/test', {timestamp});
-      if (data) {
-        dispatch(showAlert({ message: data }))
-      } else {
-        dispatch(showAlert({ type: 'error', message: error}))
-      }
-    }
+    const controller = new AbortController();
+    const signal = controller.signal;
+  
     const getCSRF = async () => {
-      const res = await getData(`${be_url}/sanctum/csrf-cookie`);
-      console.log('res ->', res);
+      const {error} = await getData(`${be_url}/sanctum/csrf-cookie`, {}, signal);
+      if (error) return  dispatch(showAlert({ type: 'error', message: error}));
+      // api.defaults.headers.common['X-CSRF-TOKEN'] = String(cookies);
     }
-    const getCookieAndFetch = async () => {
-      await getCSRF();
-      await fetchAndMessage();
-    }
-    getCookieAndFetch();
- 
-  }, [dispatch, be_url])
+    getCSRF();
+    return () => controller.abort();
+  }, 
+    [be_url, dispatch]
+  )
+
+  useEffect (()=> {
+    console.log('cookies changed ->', cookies);
+  }, [cookies])
   return (
     <div className="App">
       <AlertMessage/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <div className='with-button'>
+        <Button variant='contained' onClick={fetchAndMessage}> Make a test</Button>
+      </div>
     </div>
   );
 }
