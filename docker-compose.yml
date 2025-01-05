@@ -10,7 +10,12 @@ services:
       - "8080:80"
     volumes:
       - ./backend/laravel:/var/www/html
-      - ./backend/apache/config:/etc/apache2
+      - ./backend/apache/config/apache2.conf:/etc/apache2/apache2.conf
+      - ./backend/apache/config/ports.conf:/etc/apache2/ports.conf
+      - ./backend/apache/config/envvars:/etc/apache2/envvars
+      - ./backend/apache/config/conf-available:/etc/apache2/conf-available
+      - ./backend/apache/config/mods-available:/etc/apache2/mods-available
+      - ./backend/apache/config/sites-available:/etc/apache2/sites-available
     env_file:
       - .env
     depends_on:

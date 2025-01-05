@@ -15,16 +15,8 @@ RUN apt-get update && apt-get install -y supervisor \
     && docker-php-ext-install gd pdo pdo_mysql zip \
     && rm -rf /var/lib/apt/lists/*
 
-# Create necessary directories and log files
-# RUN mkdir /etc/apache2/logs/ && \
-#     chown -R www-data:www-data /etc/apache2/logs/ && \
-#     chmod -R 755 /etc/apache2/logs/ 
-
 # Copy supervisor config
 COPY /backend/apache/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Enable necessary Apache modules
-RUN a2enmod proxy rewrite headers
 
 # Expose port 80
 EXPOSE 80
