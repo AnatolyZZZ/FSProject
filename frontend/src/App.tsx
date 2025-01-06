@@ -32,7 +32,6 @@ function App() {
     const getCSRF = async () => {
       const {error} = await getData(`${be_url}/sanctum/csrf-cookie`, {}, signal);
       if (error) return  dispatch(showAlert({ type: 'error', message: error}));
-      // api.defaults.headers.common['X-CSRF-TOKEN'] = String(cookies);
     }
     getCSRF();
     return () => controller.abort();
@@ -41,7 +40,10 @@ function App() {
   )
 
   useEffect (()=> {
-    console.log('cookies changed ->', cookies);
+    if (!cookies) return
+    const token = cookies['XSRF-TOKEN'] as string
+    if (!token) return
+    api.defaults.headers.common['X-CSRF-TOKEN'] = token;
   }, [cookies])
   return (
     <div className="App">
