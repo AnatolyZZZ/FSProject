@@ -55,6 +55,22 @@ services:
     env_file:
       - .env
 
+  frontend:
+    container_name: project_fe
+    build:
+      context: ./
+      dockerfile: ./frontend/Dockerfile
+    restart: on-failure
+    environment:
+      - PORT=4000
+      - HOST=0.0.0.0
+    volumes:
+       - ./frontend:/var/www/html
+    networks:
+      - project_network
+    ports:
+      - "4000:4000"
+
 volumes:
   project_SQL_database:
 
