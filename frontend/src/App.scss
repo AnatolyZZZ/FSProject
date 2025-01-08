@@ -1,8 +1,11 @@
+html * {
+  box-sizing: border-box; 
+}
 .App {
   text-align: center;
 }
 .with-button {
-  width: 100vw;
+  width: 100%;
   padding: 3rem 3rem;
   background: palegoldenrod;
 }

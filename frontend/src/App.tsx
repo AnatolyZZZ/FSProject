@@ -43,7 +43,8 @@ function App() {
     if (!cookies) return
     const token = cookies['XSRF-TOKEN'] as string
     if (!token) return
-    api.defaults.headers.common['X-CSRF-TOKEN'] = token;
+    const encodedToken = encodeURIComponent(token);
+    api.defaults.headers.common['X-CSRF-TOKEN'] = encodedToken;
   }, [cookies])
   return (
     <div className="App">
