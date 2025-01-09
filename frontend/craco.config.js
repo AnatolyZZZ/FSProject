@@ -19,6 +19,11 @@ module.exports = {
         ...webpackConfig.devServer,
         host: '0.0.0.0', // Ensure it's listening on all interfaces
         port: 4000, // Ensure the app listens on port 4000
+        watchOptions: {
+          poll: 1000, // Same polling settings for the dev server
+          aggregateTimeout: 300,
+          ignored: /node_modules/,
+        },
       };
 
       return webpackConfig;
