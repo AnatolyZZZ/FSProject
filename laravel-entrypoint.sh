@@ -12,8 +12,8 @@ chmod +x wait-for-it.sh
 ./wait-for-it.sh mysql:3306 --timeout=30 --strict -- echo "MySQL is ready"
 
 # Run database migrations and seeding
-php artisan db:seed --force
-php artisan migrate --force
+php artisan migrate 
+php artisan db:seed 
 
 # Keep the container running
 tail -f /dev/null

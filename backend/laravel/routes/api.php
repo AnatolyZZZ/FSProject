@@ -10,5 +10,7 @@ use App\Http\Middleware\LogResponse;
 //     });
 // });
 
+// Route::middleware([LogResponse::class])->post('/test', [TestController::class, 'store']);
+
 Route::post('/test', [TestController::class, 'store']);
 

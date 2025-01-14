@@ -6,7 +6,7 @@ const apiUrl = state.app.api_url;
 
 export const api = axios.create({
 	baseURL: apiUrl, 
-	timeout: 2000,
+	timeout: 5000,
 	headers: { 'Content-Type': 'application/json', 'credentials' : 'include' },
 	withCredentials: true
 });
