@@ -21,6 +21,7 @@
 /backend/laravel/.nova
 /backend/laravel/.vscode
 /backend/laravel/.zed
+/backend/laravel/apache/logs
 
 
 # dependencies

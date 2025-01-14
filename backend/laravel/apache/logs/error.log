@@ -1,2 +1,0 @@
-[Sun Jan 05 15:09:15.737641 2025] [mpm_prefork:notice] [pid 17:tid 17] AH00163: Apache/2.4.62 (Debian) PHP/8.3.15 configured -- resuming normal operations
-[Sun Jan 05 15:09:15.737895 2025] [core:notice] [pid 17:tid 17] AH00094: Command line: 'apache2 -D FOREGROUND'
