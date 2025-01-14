@@ -52,4 +52,3 @@ export LANG
 ## This will produce a verbose output on package installations of web server modules and web application
 ## installations which interact with Apache
 #export APACHE2_MAINTSCRIPT_DEBUG=1
-export CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:=/localhost:3000,localhost:3001}
