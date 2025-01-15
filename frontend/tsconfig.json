@@ -6,7 +6,8 @@
 		"@utils/*": ["utils/*"],
 		"@store/*": ["store/*"],
 		"@api": ["plugins/axios"],
-		"@assets/*": ["assets/*"] 
+		"@assets/*": ["assets/*"],
+		"@pages/*": ["pages/*"]
 	  },
 	  "esModuleInterop": true,
 	  "allowSyntheticDefaultImports": true,

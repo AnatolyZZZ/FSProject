@@ -1,19 +1,14 @@
-import { useEffect } from 'react'
-import { postData, getData } from '@api'
-import { Dispatch, RootState } from '@store/store';
+import { postData } from '@api'
+import { Dispatch } from '@store/store';
 import Button from '@mui/material/Button';
 import { showAlert } from '@store/actions/app';
-import {  useDispatch, useSelector } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import AlertMessage from '@components/AlertMessage';
 import './App.scss';
-import { useCookies } from 'react-cookie';
-import { api } from './plugins/axios'
 
 
 function App() {
-  const be_url = useSelector<RootState>(state => state.app.be_url)
   const dispatch = useDispatch<Dispatch>();
-  const [cookies, setCookie, removeCookie] = useCookies(['XSRF-TOKEN']);
 
   const fetchAndMessage = async () => {
     const moment = Date.now();
@@ -25,27 +20,7 @@ function App() {
     }
   }
 
-  useEffect (()=> {
-    const controller = new AbortController();
-    const signal = controller.signal;
-  
-    const getCSRF = async () => {
-      const {error} = await getData(`${be_url}/sanctum/csrf-cookie`, {}, signal);
-      if (error) return  dispatch(showAlert({ type: 'error', message: error}));
-    }
-    getCSRF();
-    return () => controller.abort();
-  }, 
-    [be_url, dispatch]
-  )
 
-  useEffect (()=> {
-    if (!cookies) return
-    const token = cookies['XSRF-TOKEN'] as string
-    if (!token) return
-    const encodedToken = encodeURIComponent(token);
-    api.defaults.headers.common['X-CSRF-TOKEN'] = encodedToken;
-  }, [cookies])
   return (
     <div className="App">
       <AlertMessage/>
