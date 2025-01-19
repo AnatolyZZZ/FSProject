@@ -23,7 +23,7 @@ const CSRFToken : React.FC = () => {
 		getCSRF();
 		return () => controller.abort();
 	  }, 
-		[be_url, dispatch]
+	[be_url, dispatch]
 	)
 	  useEffect (()=> {
 		if (!cookies) return

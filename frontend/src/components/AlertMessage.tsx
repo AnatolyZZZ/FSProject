@@ -13,14 +13,14 @@ const AlertMessage: React.FC = () => {
 	const {  show_alert, alert_message , alert_type } = useSelector<RootState, RootState['app']>(state => state.app, shallowEqual);
 	const classes = show_alert ? "layout-alert-wrapp layout-alert-wrapp_show" : "layout-alert-wrapp "
 	return  <div className={classes}>
-				<Alert 
-					severity={ alert_type }
-					variant={getVariant(alert_type)}
-					onClose={() => dispatch(setAlertShow(false)) }
-				>
-					{ alert_message }
-				</Alert>
-			</div>
+		<Alert 
+			severity={ alert_type }
+			variant={getVariant(alert_type)}
+			onClose={() => dispatch(setAlertShow(false)) }
+		>
+			{ alert_message }
+		</Alert>
+	</div>
 }
 
 export default AlertMessage

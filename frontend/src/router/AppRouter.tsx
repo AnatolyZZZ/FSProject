@@ -12,15 +12,15 @@ const layoutVocabulary = {
 
 const AppRouter : React.FC = () => {
 	return (
-	<BrowserRouter>
-		<Routes>
-			{routes.map(({ path, layout, element: Component}) => (
-				<Route path='/' key={path} element={ (layoutVocabulary[layout] || layoutVocabulary.default)({})}>
-					<Route path={path} element={<Component/>}/>
-				</Route>
-			))}
-		</Routes>
-	</BrowserRouter>)
+		<BrowserRouter>
+			<Routes>
+				{routes.map(({ path, layout, element: Component}) => (
+					<Route path='/' key={path} element={ (layoutVocabulary[layout] || layoutVocabulary.default)({})}>
+						<Route path={path} element={<Component/>}/>
+					</Route>
+				))}
+			</Routes>
+		</BrowserRouter>)
 }
 
 export default AppRouter

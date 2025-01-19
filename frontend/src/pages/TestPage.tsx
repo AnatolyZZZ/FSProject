@@ -15,11 +15,11 @@ const TestPage  :  React.FC = () => {
 		  dispatch(showAlert({ type: 'error', message: error}))
 		}
 	  }
-	return <>
-<div className='with-button'>
-    <Button variant='contained' onClick={fetchAndMessage}> Make a test</Button>
-</div>
-</>
+	return (
+		<div className='with-button'>
+			<Button variant='contained' onClick={fetchAndMessage}> Make a test</Button>
+		</div>
+	)
 	
 	
 }
