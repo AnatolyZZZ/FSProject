@@ -26,7 +26,8 @@
     "start": "HOST=0.0.0.0 craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "typecheck": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
