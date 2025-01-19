@@ -15,7 +15,7 @@ const AppRouter : React.FC = () => {
 	<BrowserRouter>
 		<Routes>
 			{routes.map(({ path, layout, element: Component}) => (
-				<Route path='/' element={ (layoutVocabulary[layout] || layoutVocabulary.default)({})}>
+				<Route path='/' key={path} element={ (layoutVocabulary[layout] || layoutVocabulary.default)({})}>
 					<Route path={path} element={<Component/>}/>
 				</Route>
 			))}
