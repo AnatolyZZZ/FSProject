@@ -5,12 +5,41 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from '@store/store'; 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+	components: {
+	  MuiButton: {
+			defaultProps: {
+				variant: 'contained', 
+		  	color: 'primary', 
+			},
+			styleOverrides: {
+				root: {
+					textTransform: 'none', 
+					borderRadius: '3px',  
+				},
+			},
+	  },
+	  MuiTextField: {
+			defaultProps: {
+		  variant: 'outlined', 
+		  fullWidth: true,
+		  size: 'small'
+			},
+	  },
+	},
+});
+  
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<App />
+			<ThemeProvider theme={theme}>
+				<App />
+			</ThemeProvider>
 		</Provider>
 	</React.StrictMode>
 );
