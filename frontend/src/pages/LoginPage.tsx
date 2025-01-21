@@ -4,6 +4,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { isEmail} from '@utils/validationRules';
+import { postData } from '@api';
+import { showAlert } from '@store/actions/app';
+import { Dispatch, RootState } from '@store/store';
+import { useDispatch, useSelector} from 'react-redux';
 
 
 const rulesVocabulary = {
@@ -11,22 +15,30 @@ const rulesVocabulary = {
 	password: () => ''
 }
 const LoginPage: React.FC = () => {
+	const dispatch = useDispatch<Dispatch>();
+	const be_url = useSelector<RootState>(state => state.app.be_url);
 	const [formData, setFormData] = useState({email: '', password: ''});
-	const [validation, setValidation] = useState({email: '', password: ''})
+	const [validation, setValidation] = useState({email: '', password: ''});
+	const [formValid, setFormValid] = useState(false);
 
 	const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
 		const {name, value} = event.target;
 		setFormData((prevFormData) => {
 			const newFormData = {...prevFormData, [name]: value}
 			setValidation((prevValidation) => {
-				const newValidation = {...prevValidation, [name]: rulesVocabulary[name](newFormData[name])}
+				const newValidation = {...prevValidation, [name]: rulesVocabulary[name](newFormData[name])};
+				setFormValid(Object.values(newValidation).every(message => !message));
 				return newValidation})
 			return newFormData}
 		)
 	}
 
-	const onSubmit = (event: React.FormEvent) => {
-		event.preventDefault()
+	const onSubmit = async (event: React.FormEvent) => {
+		event.preventDefault();
+		if (!formValid) return;
+		const {data, error} = await postData(`${be_url}/login`, formData);
+		if (error) dispatch(showAlert({type: 'error', message: error}))
+		console.log('data ->', data);
 	}
 	
 	return (
@@ -63,7 +75,12 @@ const LoginPage: React.FC = () => {
 					error={!!validation.password}
 					helperText={validation.password}
 				/>
-				<Button type='submit'>Login</Button>
+				<Button 
+					type='submit'
+					disabled={!formValid}
+				>
+					Login
+				</Button>
 			</Box>
 			
 		</div>

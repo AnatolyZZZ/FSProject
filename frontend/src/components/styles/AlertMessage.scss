@@ -6,6 +6,7 @@
 	height: 30px;
 	opacity: 0;
 	transition: opacity 0.7s ease;
+	z-index: 999;
 	&.layout-alert-wrapp_show {
 		opacity: 1;
 	}
