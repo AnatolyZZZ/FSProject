@@ -9,3 +9,22 @@ html * {
   padding: 3rem 3rem;
   background: palegoldenrod;
 }
+
+.app-section {
+  padding: 0 20px;
+  @media (min-width : 600px) {
+    padding: 0 40px;
+  }
+}
+
+.app-container {
+  max-width: min(90vw, 1400px);
+  margin: 0 auto;
+}
+
+.app-page {
+  padding: 20px 0;
+  @media (min-width : 600px) {
+    padding: 40px 0;
+  }
+}
