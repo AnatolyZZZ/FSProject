@@ -12,7 +12,12 @@ export default [
 	pluginReact.configs.flat.recommended,
 	{rules: {
 		'indent': ["warn", 'tab'],
-		'react/react-in-jsx-scope' : 'off'
+		'react/react-in-jsx-scope' : 'off',
+		'@typescript-eslint/no-require-imports': 'off'
 	}},
-	{settings: {react: {version: "detect"}}}
+	{settings: {react: {version: "detect"}}},
+	{ 
+		files: ["*.config.js", "*.config.cjs", "scripts/**/*.js"],
+		languageOptions: { globals: globals.node }
+	}
 ]; 
