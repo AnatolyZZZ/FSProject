@@ -3,9 +3,11 @@ import { postData } from '@api'
 import { Dispatch } from '@store/store';
 import { useDispatch } from 'react-redux';
 import { showAlert } from '@store/actions/app';
+import useBackground from 'hooks/useBackground'
 
 const TestPage  :  React.FC = () => {
 	const dispatch = useDispatch<Dispatch>();
+	useBackground('palegoldenrod')
 	const fetchAndMessage = async () => {
 		const moment = Date.now();
 		const { data, error } = await postData<{message: string, total_milliseconds : number}>('/test', {moment});
