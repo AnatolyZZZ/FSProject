@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
-import { isEmail} from '@utils/validationRules';
+import { isEmail, requiredString} from '@utils/validationRules';
 import { postData } from '@api';
 import { showAlert } from '@store/actions/app';
 import { Dispatch, RootState } from '@store/store';
@@ -12,7 +12,7 @@ import { useDispatch, useSelector} from 'react-redux';
 
 const rulesVocabulary = {
 	email: isEmail,
-	password: () => ''
+	password: requiredString
 }
 const LoginPage: React.FC = () => {
 	const dispatch = useDispatch<Dispatch>();
@@ -48,33 +48,37 @@ const LoginPage: React.FC = () => {
 				sx={{
 					width: 400,
 					flexDirection: 'column',
-					gap: 1,
+					gap: 0,
 					display: 'flex'
 				}}
 				onSubmit={onSubmit}
 			>
-				<TextField 
-					label="email" 
-					variant="outlined" 
-					type='email'
-					name='email'
-					value={formData.email}
-					autoComplete='email'
-					onChange={handleChange}
-					error={!!validation.email}
-					helperText={validation.email}
-				/>
-				<TextField 
-					label="password" 
-					variant="outlined" 
-					type='password'
-					name='password'
-					autoComplete='password'
-					value={formData.password}
-					onChange={handleChange}
-					error={!!validation.password}
-					helperText={validation.password}
-				/>
+				<div className="input-wrap">
+					<TextField
+						label="email"
+						variant="outlined"
+						type='email'
+						name='email'
+						value={formData.email}
+						autoComplete='email'
+						onChange={handleChange}
+						error={!!validation.email}
+						helperText={validation.email}
+					/>
+				</div>
+				<div className="input-wrap">
+					<TextField
+						label="password"
+						variant="outlined"
+						type='password'
+						name='password'
+						autoComplete='password'
+						value={formData.password}
+						onChange={handleChange}
+						error={!!validation.password}
+						helperText={validation.password}
+					/>
+				</div>
 				<Button 
 					type='submit'
 					disabled={!formValid}

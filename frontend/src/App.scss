@@ -28,3 +28,9 @@ html * {
     padding: 40px 0;
   }
 }
+
+.input-wrap {
+  .MuiFormControl-root {
+    min-height: 64px;
+  }
+}
