@@ -29,8 +29,7 @@ const CSRFToken : React.FC = () => {
 		if (!cookies) return
 		const token = cookies['XSRF-TOKEN'] as string
 		if (!token) return
-		const encodedToken = encodeURIComponent(token);
-		api.defaults.headers.common['X-CSRF-TOKEN'] = encodedToken;
+		api.defaults.headers.common['X-XSRF-TOKEN'] = token;
 	  }, [cookies])
 	return <></>
 }
