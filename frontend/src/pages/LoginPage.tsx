@@ -8,6 +8,7 @@ import { postData } from '@api';
 import { showAlert } from '@store/actions/app';
 import { Dispatch, RootState } from '@store/store';
 import { useDispatch, useSelector} from 'react-redux';
+import { useNavigate } from 'react-router';
 
 
 const rulesVocabulary = {
@@ -20,6 +21,7 @@ const LoginPage: React.FC = () => {
 	const [formData, setFormData] = useState({email: '', password: ''});
 	const [validation, setValidation] = useState({email: '', password: ''});
 	const [formValid, setFormValid] = useState(false);
+	const navigate = useNavigate()
 
 	const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
 		const {name, value} = event.target;
@@ -36,9 +38,9 @@ const LoginPage: React.FC = () => {
 	const onSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		if (!formValid) return;
-		const {data, error} = await postData(`${be_url}/login`, formData);
-		if (error) dispatch(showAlert({type: 'error', message: error}))
-		console.log('data ->', data);
+		const { error} = await postData(`${be_url}/login`, formData);
+		if (error) return dispatch(showAlert({type: 'error', message: error}))
+		navigate('/test')
 	}
 	
 	return (

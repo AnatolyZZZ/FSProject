@@ -29,6 +29,13 @@ html * {
   }
 }
 
+.profile-menu {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: fit-content;
+}
+
 .input-wrap {
   .MuiFormControl-root {
     min-height: 64px;
